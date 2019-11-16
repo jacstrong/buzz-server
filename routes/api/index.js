@@ -10,5 +10,6 @@ router.use('/admin', require('./admin/admin'))
 router.use('/queue', require('./queue/queue'))
 router.use('/contact', require('./contact/contact'))
 router.use('/notify', require('./notify/notify'))
+router.use('/marketing', require('./marketing/marketing'))
 
 module.exports = router;
