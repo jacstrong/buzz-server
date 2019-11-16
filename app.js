@@ -46,6 +46,7 @@ require('./models/passwordConfSchema')
 require('./models/userSettingsSchema')
 require('./models/queueSchema')
 require('./models/contactSchema')
+require('./models/reservationSchema')
 
 // Custom Middleware
 require('./middleware/passport');
