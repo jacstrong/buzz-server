@@ -16,7 +16,9 @@ const QueueSchema = mongoose.Schema({
         name: { type: String, required: [true, 'Customer name is required']},
         state: { type: String, enum: states, required: [true, 'Must have a state']},
         timeStamp: { type: Date, required: [true, 'Must have a timestamp']},
-        partyNum: { type: Number}
+        partyNum: { type: Number},
+        time: { type: String},
+        date: { type: String}
     }],
     name: { type: String, enum: ['Walk In', 'Reservation'], required: [true, 'A queue must have a name']},
 })
