@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 if (isProduction) {
   mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
 } else {
-  mongoose.connect('mongodb://localhost:27017/store-badger', { useNewUrlParser: true });
+  mongoose.connect('mongodb://localhost:27017/buzz', { useNewUrlParser: true });
 }
 mongoose.set('useCreateIndex', true);
 
@@ -43,12 +43,9 @@ require('./models/userSchema')
 require('./models/adminSchema')
 require('./models/emailConfirmationSchema')
 require('./models/passwordConfSchema')
-require('./models/orgSchema')
-require('./models/imageSchema')
-require('./models/storeSchema')
-require('./models/storeItemSchema')
-require('./models/orderSchema')
-require('./models/billingSchema')
+require('./models/userSettingsSchema')
+require('./models/queueSchema')
+require('./models/contactSchema')
 
 // Custom Middleware
 require('./middleware/passport');

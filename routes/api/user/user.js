@@ -6,6 +6,7 @@ const email = require('../../plugins/email');
 const jwt = require('jsonwebtoken')
 const UserSchema = mongoose.model('UserSchema');
 const EmailConfirmationSchema = mongoose.model('EmailConfirmationSchema');
+const QueueSchema = mongoose.model('QueueSchema');
 
 
 router.use('/emailconfirmation', require('./emailConfirmation'));
@@ -102,6 +103,9 @@ router.post('/'/* , auth.optional */, (req, res, next) => {
       emailConfirmation.save()
       
       email.accountConfirmation(emailData);
+
+      new QueueSchema({ownerID: finalUser._id, name: 'Reservation'}).save()
+      new QueueSchema({ownerID: finalUser._id, name: 'Walk In'}).save()
       
       return finalUser
       .save()
@@ -182,7 +186,7 @@ router.post('/login'/* , auth.optional */, (req, res, next) => {
     });
   }
 
-  return passport.authenticate('dispatch-local', { session: false }, (err, passportUser, info) => {
+  return passport.authenticate('user-local', { session: false }, (err, passportUser, info) => {
     if (err) {
       return next(err);
     }

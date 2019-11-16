@@ -33,3 +33,17 @@ passport.use('admin-local', new LocalStrategy({
       return done(null, user);
     }).catch(done);
 }));
+
+passport.use('user-local', new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password'
+}, (email, password, done) => {
+  UserSchema.findOne({ email })
+    .then((user) => {
+      if(!user || !user.validatePassword(password)) {
+        return done(null, false, { errors: { 'email or password': 'is invalid'} });
+      }
+
+      return done(null, user);
+    }).catch(done);
+}));

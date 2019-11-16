@@ -7,5 +7,8 @@ router.get('/', (req, res, next) => {
 
 router.use('/user', require('./user/user'))
 router.use('/admin', require('./admin/admin'))
+router.use('/queue', require('./queue/queue'))
+router.use('/contact', require('./contact/contact'))
+router.use('/notify', require('./notify/notify'))
 
 module.exports = router;
