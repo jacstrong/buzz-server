@@ -26,7 +26,7 @@ router.post('/ready', auth.required, (req, res, next) => {
       '+1435-252-9809',
       '18018371198',
       // doc.phoneNumber,
-      'You are on the wait list. You will recieve a text when your table is ready.'
+      'Your table is ready! 🥐🍲🥓'
     ).then(function(message_created) {
       console.log(message_created)
     });  

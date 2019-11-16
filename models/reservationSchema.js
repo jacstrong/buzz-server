@@ -17,6 +17,8 @@ const ReservationSchema = mongoose.Schema({
     phoneNumber: { type: String, required: [true, 'Reservation must have a phone number']},
     date: { type: String, required: [true, 'Reservation must have a date']},
     time: { type: String, required: [true, 'Reservation must have a time']},
+    partyNum: { type: Number, required: [true, 'Reservation size is required']},
+    state: {type: String}
 })
 
 module.exports = mongoose.model('ReservationSchema', ReservationSchema);

@@ -5,16 +5,23 @@
 const router = require('express').Router()
 const mongoose = require('mongoose')
 const auth = require('../../auth')
+const datefns = require('date-fns')
 
 const QueueSchema = mongoose.model('QueueSchema')
+const ReservationSchema = mongoose.model('ReservationSchema')
 
 router.get('/reservation', auth.required, (req, res, next) => {
-    QueueSchema.findOne({ownerID: req.user.id, name: 'Reservation'}).exec((err, doc) => {
+    QueueSchema.findOne({ownerID: req.user.id, name: 'Reservation'}).exec((err, queue) => {
         if (err) {
-            return res.status(500).json({message: err.message})
+            return res.status(500).json(err)
         }
-
-        return res.json(doc)
+        let formatted = datefns.format(new Date(), 'yyyy-MM-dd')
+        ReservationSchema.find({ownerID: req.user.id, date: formatted},
+            (err, doc) => {
+                queue.queue = doc
+                return res.json(queue)
+            })
+        
     })
 })
 
