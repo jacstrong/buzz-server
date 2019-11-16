@@ -101,9 +101,10 @@ const setupB2 = function (callback) {
 }
 
 const init = function (callback) {
-  generateSecret()
-  setupB2(callback)
-  setInterval(setupB2, 1000 * 60 * 60 * 23)
+  // generateSecret()
+  // setupB2(callback)
+  // setInterval(setupB2, 1000 * 60 * 60 * 23)
+  callback()
 }
 
 module.exports = {
