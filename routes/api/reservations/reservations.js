@@ -49,6 +49,16 @@ router.post('/', auth.required, (req, res, next) => {
                     trace: process.env.NODE_ENV === 'dev' ? err : ''
                 })
             }
+
+            client.messages.create(
+                // '+1(435)535-0581',
+                '+1435-252-9809',
+                '13854998403',
+                // doc.phoneNumber,
+                'You have placed a reservation. We look forward to having you!'
+            ).then(function(message_created) {
+                console.log(message_created)
+            })
             return res.json(doc)
 
         })

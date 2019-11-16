@@ -8,6 +8,12 @@ const auth = require('../../auth')
 
 const ContactSchema = mongoose.model('ContactSchema')
 const QueueSchema = mongoose.model('QueueSchema')
+const ReservationSchema = mongoose.model('ReservationSchema')
+
+const plivo = require('plivo');
+const client = new plivo.Client(
+    require('./config.json').auth_id,
+    require('./config.json').auth_token);
 
 router.post('/', auth.required, (req, res, next) => {
   const newContact = new ContactSchema
@@ -38,8 +44,19 @@ router.post('/', auth.required, (req, res, next) => {
           })
         }
         doc.queue.push(data)
+      client.messages.create(
+          // '+1(435)535-0581',
+          '+1435-252-9809',
+          '18018371198',
+          // doc.phoneNumber,
+          'You have been put on the waitlist. We will have you seated shortly!'
+      ).then(function(message_created) {
+          console.log(message_created)
+      })
         return res.json(doc)
       })
+
+
   })
 })
 
