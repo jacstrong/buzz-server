@@ -43,4 +43,17 @@ router.post('/', auth.required, (req, res, next) => {
   })
 })
 
+router.get('/', auth.required, (req, res, next) => {
+  ContactSchema.find({ownerID: req.user.id}, (err, doc) => {
+    if (err) {
+      return res.status(500).json({
+          message: err.message,
+          trace: process.env.NODE_ENV === 'dev' ? err : ''
+      })
+    }
+    return res.json(doc)
+  }
+)})
+
+
 module.exports = router
